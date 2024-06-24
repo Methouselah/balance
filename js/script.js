@@ -1,39 +1,16 @@
-document.addEventListener("DOMContentLoaded", () => {
-    const tabs  = document.querySelectorAll(".tabheader__item"),
-    tabsContent = document.querySelectorAll(".tabcontent"),
-    tabsParent = document.querySelector(".tabheader__items");
+function makeCounter() {
+    let count = 0;
 
-    function hideTabContent() {
-        tabsContent.forEach(item => {
-            item.style.display = "none";
-            // item.classList.add("hide");
-            // item.classList.remove("show");
-        })
-
-        tabs.forEach(item => {
-            item.classList.remove("tabheader__item_active");
-        })
+    return () => {
+        count++;
+        return count;
     }
+}
 
-    function showTabContent(i = 0) {
-        tabsContent[i].style.display = "block";
-        // tabsContent[i].classList.add("show");
-        // tabsContent[i].classList.remove("hide");
-        tabs[i].classList.add("tabheader__item_active");
-    }
-    hideTabContent();
-    showTabContent(0);
+const counter1 = makeCounter();
+console.log(counter1()); // 1
+console.log(counter1()); // 2
 
-    tabsParent.addEventListener("click", (e) => {
-        const target = e.target;
-
-        if(target && target.classList.contains("tabheader__item")) {
-             tabs.forEach((item, i) => {
-                if(target == item) {
-                    hideTabContent();
-                    showTabContent(i);  
-                }
-             })
-        }
-    })
-})
+const counter2 = makeCounter();
+console.log(counter2()); // 1
+console.log(counter1()); // 3
