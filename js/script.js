@@ -5,14 +5,23 @@ fetch(url)
   .then(data => console.log(data))
   .catch(error => console.error('Ошибка при выполнении запроса:', error));
 
-  function addListItem() {
-    const listItem = document.createElement('li');
-    const inputText = document.getElementById('itemInput').value;
-    listItem.textContent = inputText;
+// Функция для фильтрации элементов списка
+function filterList() {
+  const filter = document.getElementById('searchInput').value.toUpperCase();
+  const listItems = document.getElementById('itemList').getElementsByTagName('li');
 
-    document.getElementById('itemList').appendChild(listItem);
-    document.getElementById('itemInput').value = ''; // Очистить поле ввода
+  for (let i = 0; i < listItems.length; i++) {
+      const txtValue = listItems[i].textContent || listItems[i].innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+          listItems[i].style.display = '';
+      } else {
+          listItems[i].style.display = 'none';
+      }
+  }
 }
 
-// Добавление обработчика событий для кнопки
-document.getElementById('addItemButton').addEventListener('click', addListItem);
+// Добавление обработчика событий для поля ввода
+document.getElementById('searchInput').addEventListener('keyup', filterList);
+
+
+
