@@ -1,1 +1,1 @@
-# Spotify Clone
+# Balance (Personal Finance Tracker)
