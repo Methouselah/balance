@@ -1,3 +1,185 @@
-div {
-  color: red;
+/* Базовые переменные (светлая тема по умолчанию) */
+:root {
+  --main-bg-color: white;
+  --second-color: #f5f5f5;
+  --text-color: black;
+  --icon-color: #333333;
+  --border-color: #e0e0e0;
+  --accent-color: #007bff;
+}
+
+/* Тёмная тема */
+html.dark-theme {
+  --main-bg-color: #1a1a1a;
+  --second-color: #222831;
+  --text-color: white;
+  --icon-color: white;
+  --border-color: #333333;
+  --accent-color: #4dabf7;
+}
+
+/* Светлая тема (явно определённая) */
+html.light-theme {
+  --main-bg-color: white;
+  --second-color: #f5f5f5;
+  --text-color: black;
+  --icon-color: #333333;
+  --border-color: #e0e0e0;
+  --accent-color: #007bff;
+}
+
+body {
+  transition: all 0.3s ease-in-out;
+  color: var(--text-color);
+  background-color: var(--main-bg-color);
+  min-height: 100vh;
+}
+
+#root {
+  display: flex;
+}
+
+.wrapper {
+  width: 100%;
+}
+
+/* =============== HEADER =============== */
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 70px;
+  border-bottom: 1px solid var(--second-color);
+  padding: 0 20px;
+}
+
+.setting,
+.edit {
+  background-color: inherit;
+  border: none;
+  transition: all 2s;
+}
+.setting svg,
+.edit svg {
+  transition: all 0.3s;
+}
+
+.header__balance {
+  text-align: center;
+}
+.header__balance__count {
+  font-size: 21px;
+}
+.header__balance__info {
+  font-size: 14px;
+}
+
+/* =============== Sidebar =============== */
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 15%;
+  font-size: 19px;
+}
+
+.sidebar__title {
+  text-align: center;
+  height: 70px;
+  padding-top: 15px;
+  font-size: 28px;
+}
+.sidebar__nav {
+  flex: 1;
+}
+
+.sidebar__nav-list {
+  padding: 0 20px;
+  min-height: 100%;
+}
+
+.sidebar__nav-item {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 15px;
+  padding: 5px 10px;
+  gap: 10px;
+}
+
+.current {
+  background-color: var(--second-color);
+  border-radius: 25px;
+}
+
+/* switch mode */
+.sidebar__change-modes {
+  height: 60px;
+  padding: 10px 20px;
+}
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 48px;
+  height: 26px;
+  margin: 5px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: grey;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+  border-radius: 34px;
+}
+
+@keyframes going-dark {
+  100% {
+    -webkit-transform: translateX(20px);
+  }
+}
+
+@keyframes going-light {
+  0% {
+    -webkit-transform: translateX(20px);
+  }
+  100% {
+    -webkit-transform: translateX(0px);
+  }
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 18px;
+  width: 18px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  border-radius: 50%;
+  -webkit-animation: going-light 0.4s cubic-bezier(0.57, 1.52, 0.64, 1) normal;
+  -webkit-transition: 0.4s;
+  animation: going-light 0.4s cubic-bezier(0.57, 1.52, 0.64, 1) normal;
+  transition: 0.4s;
+}
+
+input:checked + .slider:before {
+  background-color: white;
+  -webkit-animation: going-dark 0.4s cubic-bezier(0.57, 1.52, 0.64, 1) forwards;
+  -webkit-transition: all 0.4s;
+  animation: going-dark 0.4s cubic-bezier(0.57, 1.52, 0.64, 1) forwards;
+  transition: all 0.4s;
 }
